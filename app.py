@@ -3,6 +3,9 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 
+# Configuración de página
+st.set_page_config(page_title="Pileteros Pro", page_icon="💧")
+
 # --- CONFIGURACIÓN PARA EL ÍCONO DEL CELULAR ---
 st.markdown(
     f"""
@@ -13,9 +16,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# Configuración de página
-st.set_page_config(page_title="Pileteros Pro", page_icon="💧")
 
 def conectar_nube():
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
