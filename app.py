@@ -51,27 +51,25 @@ try:
 
     if st.button("🚀 GUARDAR REPORTE"):
         if lugar:
-            hoja_s = libro.worksheet("Servicios")
-            # Armamos la fila según las columnas de tu pestaña "Servicios":
-            # Fecha (B), Edificios (C), Tarea (D), Cloro (E), Pastillas (F), Piletero (K), Monto (L)
-            # Nota: Usamos append_row. Google Sheets completará las columnas.
-            fila = [
-                "", # ID (Col A)
-                datetime.now().strftime("%d/%m/%Y"), # Fecha (Col B)
-                "", # Administradora (Col C) - Podríamos buscarla luego
-                lugar, # Edificios (Col D)
-                "Visita", # Tarea (Col E)
-                cloro, # Cloro (Col F)
-                pastillas, # Pastillas (Col G)
-                nota, # Extras_Detalles (Col H)
-                gasto, # Extras_Montos (Col I)
-                "", # Total_Dia (Col J)
-                "", # Foto (Col K)
-                user # Email_Piletero o Nombre (Col L)
-            ]
-            hoja_s.append_row(fila)
-            st.success("¡Guardado exitosamente!")
-            st.balloons()
+            try:
+                hoja_s = libro.worksheet("Servicios")
+                
+                # Datos a enviar
+                nueva_fila = [
+                    "", datetime.now().strftime("%d/%m/%Y"), "", lugar, 
+                    "Visita", cloro, pastillas, nota, gasto, "", "", user
+                ]
+                
+                # Intentamos guardar y capturamos la respuesta de Google
+                resultado = hoja_s.append_row(nueva_fila, table_range="A1")
+                
+                # EXTRA: Vamos a ver qué dice Google que hizo
+                rango_actualizado = resultado.get('updates').get('updatedRange')
+                st.success(f"✅ ¡Guardado! Escrito en el rango: {rango_actualizado}")
+                st.balloons()
+                
+            except Exception as e_save:
+                st.error(f"Error detallado: {e_save}")
         else:
             st.warning("Seleccioná un edificio.")
 
