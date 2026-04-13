@@ -7,8 +7,8 @@ from datetime import datetime
 st.markdown(
     f"""
     <head>
-        <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FedericoAvaro/piletero-mobil/main/logo(2).jpg">
-        <link rel="icon" href="https://raw.githubusercontent.com/FedericoAvaro/piletero-mobil/main/logo(2).jpg">
+        <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FedericoAvaro/piletero-mobil/main/logo.jpg">
+        <link rel="icon" href="https://raw.githubusercontent.com/FedericoAvaro/piletero-mobil/main/logo.jpg">
     </head>
     """,
     unsafe_allow_html=True
