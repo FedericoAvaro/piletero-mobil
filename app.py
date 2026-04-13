@@ -54,24 +54,37 @@ try:
             try:
                 hoja_s = libro.worksheet("Servicios")
                 
-                # Datos a enviar
+                # Generamos un ID basado en la fecha y hora para que sea único
+                nuevo_id = datetime.now().strftime("%Y%m%d%H%M%S")
+
+                # Estructura exacta de tu Sheet:
+                # A: ID, B: Fecha, C: Admin, D: Edificio, E: Tarea, F: Cloro, G: Past, H: Nota, I: Gasto, J: Total, K: Foto, L: Nombre
                 nueva_fila = [
-                    "", datetime.now().strftime("%d/%m/%Y"), "", lugar, 
-                    "Visita", cloro, pastillas, nota, gasto, "", "", user
+                    nuevo_id,                             # A: ID
+                    datetime.now().strftime("%d/%m/%Y"),  # B: Fecha
+                    "",                                   # C: Administradora
+                    lugar,                                # D: Edificio
+                    "Visita",                             # E: Tarea
+                    cloro,                                # F: Cloro_10L
+                    pastillas,                            # G: Pastillas_KG
+                    nota,                                 # H: Extras_Detalles
+                    gasto,                                # I: Extras_Montos
+                    "",                                   # J: Total_Dia
+                    "",                                   # K: Foto
+                    user                                  # L: Nombre/Email
                 ]
                 
-                # Intentamos guardar y capturamos la respuesta de Google
-                resultado = hoja_s.append_row(nueva_fila, table_range="A1")
+                # append_row busca automáticamente la última fila con datos y escribe en la siguiente
+                # table_range="A1" le dice que empiece a buscar desde arriba de todo
+                hoja_s.append_row(nueva_fila, table_range="A1")
                 
-                # EXTRA: Vamos a ver qué dice Google que hizo
-                rango_actualizado = resultado.get('updates').get('updatedRange')
-                st.success(f"✅ ¡Guardado! Escrito en el rango: {rango_actualizado}")
+                st.success(f"✅ Reporte de '{lugar}' enviado correctamente.")
                 st.balloons()
                 
             except Exception as e_save:
-                st.error(f"Error detallado: {e_save}")
+                st.error(f"Hubo un problema al guardar: {e_save}")
         else:
-            st.warning("Seleccioná un edificio.")
+            st.warning("Por favor, seleccioná un edificio primero.")
 
 except Exception as e:
     st.error(f"Error de conexión o datos: {e}")
