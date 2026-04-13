@@ -3,6 +3,17 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 
+# --- CONFIGURACIÓN PARA EL ÍCONO DEL CELULAR ---
+st.markdown(
+    f"""
+    <head>
+        <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/FedericoAvaro/piletero-mobil/main/logo(2).jpg">
+        <link rel="icon" href="https://raw.githubusercontent.com/FedericoAvaro/piletero-mobil/main/logo(2).jpg">
+    </head>
+    """,
+    unsafe_allow_html=True
+)
+
 # Configuración de página
 st.set_page_config(page_title="Pileteros Pro", page_icon="💧")
 
